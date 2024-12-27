@@ -10,4 +10,7 @@ import org.springframework.validation.annotation.Validated;
 public interface FeedLikeMapper {
     int insFeedLike(@Valid FeedLikeReq p);
     int delFeedLike(@Valid FeedLikeReq p);
+
+
+
 }

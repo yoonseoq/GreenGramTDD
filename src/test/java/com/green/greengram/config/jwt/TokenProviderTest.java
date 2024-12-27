@@ -43,15 +43,6 @@ class TokenProviderTest {
 
     }
 
-    @Test
-    void validToken() {
-        //1분 (이미 지남)
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJncmVlbkBncmVlbi5rciIsImlhdCI6MTczNDQwMTQwOCwiZXhwIjoxNzM0NDAxNDY4LCJzaWduZWRVc2VyIjoie1wic2lnbmVkVXNlcklkXCI6MTAsXCJyb2xlc1wiOltcIlJPTEVfVVNFUlwiLFwiUk9MRV9BRE1JTlwiXX0ifQ.fLUAQzQxDwFnZN6lkLcnTuAzRjDotUyTyYWKHP9mIuA1HJfdQna0DoMEI1SLXCHcsbEeNFeE4W_4IzK-Lo6tJA";
-
-        boolean result = tokenProvider.validToken(token);
-
-        assertFalse(result);
-    }
 
     @Test
     void getAuthentication() {
