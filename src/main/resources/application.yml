@@ -9,7 +9,10 @@ jwt:
   secret-key: DaeguGreenArtAcademyClass502RoomForJavaSpringBootFightingD23sdfsdf23FDSADFSDFDass502RoomForJavaSprinass502RoomForJavaSprin
 
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   mapper-locations: mappers/**/*.xml
+
 
 spring:
   application:
