@@ -3,6 +3,7 @@ file:
 
 spring:
   datasource:
+    driver-class-name:
     url: jdbc:log4jdbc:mariadb://localhost/greengram_ver3_test
     username: root
     password: green502
