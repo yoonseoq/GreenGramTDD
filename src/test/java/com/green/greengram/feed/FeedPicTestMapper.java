@@ -7,9 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public class FeedPicTestMapper {
+public interface FeedPicTestMapper {
     @Select("SELECT * FROM feed_pic WHERE feed_id = #{feedId}")
-    List<FeedPicVo> selectFeedPicByFeedId(long feedId) {
-
-    };
+    List<FeedPicVo> selectFeedPicByFeedId(long feedId);
 }

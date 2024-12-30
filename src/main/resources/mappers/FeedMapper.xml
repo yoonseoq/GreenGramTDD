@@ -116,6 +116,7 @@
                 ON A.user_id = C.user_id
              GROUP BY A.feed_id, A.feed_comment_id, A.`COMMENT`
             HAVING COUNT(A.feed_id) <![CDATA[ < ]]> 4
+           <!-- HAVING COUNT(A.feed_id) <![CDATA[ < ]]> #{size} -->
         ) T3
         ON T1.feedId = T3.feed_id
     </select>

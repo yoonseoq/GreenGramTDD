@@ -1,5 +1,6 @@
 package com.green.greengram.feed;
 
+import com.green.greengram.feed.like.FeedLikeTestMapper;
 import com.green.greengram.feed.model.FeedPicDto;
 import com.green.greengram.feed.model.FeedPicVo;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FeedPicMapperTest {
     @Autowired
     FeedPicMapper feedPicMapper;
+    FeedPicTestMapper feedPicTestMapper;
 
     @Test
     void insFeedPicNoFeedThrowForeignKeyException() {
@@ -63,13 +65,13 @@ class FeedPicMapperTest {
         String[] pics = {"a.jpg", "b.jpg", "c.jpg"};
         String[] pics2 = {"a.jpg", "b.jpg", "c.jpg", "d.jpg"};
         FeedPicDto givenParam = new FeedPicDto();
-        givenParam.setFeedId(1L);
+        givenParam.setFeedId(5L);
         for (String pic : pics) {
             givenParam.getPics().add(pic);
         }
-        List<FeedPicVo> feedPicListBefore = feedPicMapper.selFeedPicList(givenParam.getFeedId());
+        List<FeedPicVo> feedPicListBefore = feedPicTestMapper.selectFeedPicByFeedId(givenParam.getFeedId());
         int actualAffectedRows = feedPicMapper.insFeedPic(givenParam);
-        List<FeedPicVo> feedPicListAfter = feedPicMapper.selFeedPicList(givenParam.getFeedId());
+        List<FeedPicVo> feedPicListAfter = feedPicTestMapper.selectFeedPicByFeedId(givenParam.getFeedId());
 
         List<String> picList = Arrays.asList(pics);
         for (int i = 0; i < pics.length; i++) {
