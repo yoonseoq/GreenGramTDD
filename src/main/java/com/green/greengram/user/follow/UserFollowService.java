@@ -16,6 +16,7 @@ public class UserFollowService {
     public int postUserFollow(UserFollowReq p) {
         p.setFromUserId(authenticationFacade.getSignedUserId());
         return mapper.insUserFollow(p);
+
     }
 
     public int deleteUserFollow(UserFollowReq p) {
