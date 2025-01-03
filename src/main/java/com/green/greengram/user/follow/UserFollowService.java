@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserFollowService {
     private final UserFollowMapper mapper;
-    private final AuthenticationFacade authenticationFacade;
+    private final AuthenticationFacade authenticationFacade; // 주소값만 넣어주게 가짜를 만듦
 
     public int postUserFollow(UserFollowReq p) {
+        //테스트는 예외발생되면 종료됨
         p.setFromUserId(authenticationFacade.getSignedUserId());
         return mapper.insUserFollow(p);
 
