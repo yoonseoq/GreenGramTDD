@@ -4,6 +4,7 @@ import com.green.greengram.common.MyFileUtils;
 import com.green.greengram.common.exception.CustomException;
 import com.green.greengram.config.security.AuthenticationFacade;
 import com.green.greengram.feed.comment.FeedCommentMapper;
+import com.green.greengram.feed.model.FeedPicDto;
 import com.green.greengram.feed.model.FeedPostReq;
 import com.green.greengram.feed.model.FeedPostRes;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
@@ -117,31 +119,34 @@ class FeedServiceTest {
             invocationParam.setFeedId(FEED_ID_10);
             return 1;
         });
-        final String SAVED_PIC_NAME_1 = "abc.jpg";
-        final String SAVED_PIC_NAME_2 = "def.jpg";
-        MultipartFile mpf1 = new MockMultipartFile("pics", "test1.txt", "text/plain", "This is test1 file".getBytes());
-        MultipartFile mpf2 = new MockMultipartFile("pics", "test2.txt", "text/plain", "This is test2 file".getBytes());
-        given(myFileUtils.makeRandomFileName(mpf1)).willReturn(SAVED_PIC_NAME_1);
-        given(myFileUtils.makeRandomFileName(mpf2)).willReturn(SAVED_PIC_NAME_2);
-        String expectedMiddlePath = String.format("feed/%d", FEED_ID_10);
-        String givenFilePath1 = String.format("%s/%s", expectedMiddlePath, SAVED_PIC_NAME_1);
-        String givenFilePath2 = String.format("%s/%s", expectedMiddlePath, SAVED_PIC_NAME_2);
-        given(myFileUtils.makeRandomFileName(mpf1)).willReturn(SAVED_PIC_NAME_1);
-        given(myFileUtils.makeRandomFileName(mpf2)).willReturn(SAVED_PIC_NAME_2);
 
-        doAnswer(invoctaion -> {
-            return null;
-        }).when(myFileUtils).transferTo(mpf1, givenFilePath1);
-        doAnswer(invoctaion -> {
-            throw new IOException();
-        }).when(myFileUtils).transferTo(mpf2, givenFilePath2);
-        List<MultipartFile> pics = new ArrayList<>(2);
-        pics.add(mpf1);
-        pics.add(mpf2);
-        FeedPostReq actualParam = new FeedPostReq();
-        actualParam.setLocation(LOCATION);
-        assertThrows(CustomException.class, () -> feedService.postFeed(pics, actualParam));
-        verify(myFileUtils).makeFolders(expectedMiddlePath); //verify는 메소드가 원하는 파라미터로 호출되었는지 확인할 수 있다.
+        final List<String> SAVED_FILE_NAMES = Arrays.asList("abc.jpg","def.jpg");
+        final List<MultipartFile> PICS = Arrays.asList(
+                new MockMultipartFile("pics", "test1.txt", "text/plain", "This is test1 file".getBytes()),
+                new MockMultipartFile("pics", "test2.txt", "text/plain", "This is test2 file".getBytes())
+        );
+        for (int i = 0; i < SAVED_FILE_NAMES.size(); i++) {
+            String picName = SAVED_FILE_NAMES.get(i);
+            MultipartFile mpf = PICS.get(i);
+            given(myFileUtils.makeRandomFileName(mpf)).willReturn(picName);
+        }
+
+        FeedPicDto expectedPicDto = new FeedPicDto();
+        expectedPicDto.setFeedId(FEED_ID_10);
+        expectedPicDto.setPics(SAVED_FILE_NAMES);
+
+        FeedPostRes expectedResult = Feed
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
